@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 
-import MusicPlayer from './MusicPlayer';
+import MusicPlayer from './music-player/MusicPlayer';
 import SearchBar from './search-bar/searchBar';
 
 const App = () => {

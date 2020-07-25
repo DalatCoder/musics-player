@@ -7,6 +7,20 @@ import { normalizeVietnameseString } from '../../utils';
 
 class SearchBar extends React.Component {
   state = { term: '' };
+  timeoutId = undefined;
+
+  onInputChange = event => {
+    this.setState({ term: event.target.value });
+
+    const { fetchSongs } = this.props;
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+    }
+
+    this.timeoutId = setTimeout(() => {
+      fetchSongs(normalizeVietnameseString(this.state.term));
+    }, 1000);
+  };
 
   onSearchSubmit = event => {
     event.preventDefault();
@@ -28,7 +42,7 @@ class SearchBar extends React.Component {
             placeholder="Nhập tên bài hát"
             spellCheck="false"
             value={this.state.term}
-            onChange={e => this.setState({ term: e.target.value })}
+            onChange={this.onInputChange}
             onFocus={() => this.props.showSuggestBox()}
           />
 

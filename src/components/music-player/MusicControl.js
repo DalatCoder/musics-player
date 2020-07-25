@@ -2,7 +2,7 @@ import './MusicControl.css';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { playSong, pauseSong } from '../actions';
+import { playSong, pauseSong } from '../../actions';
 
 class MusicControl extends React.Component {
   onPlaySong = () => {

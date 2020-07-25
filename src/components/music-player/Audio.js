@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { pauseSong, calcCurrentProgress } from '../actions';
+import { pauseSong, calcCurrentProgress } from '../../actions';
 
 class MusicAudio extends React.Component {
   audio = new Audio(this.props.song.src);
