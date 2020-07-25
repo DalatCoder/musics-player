@@ -18,7 +18,7 @@ const INITIAL_SONG = {
   cover: 'assets/images/ukulele.jpg',
   src: 'assets/music/ukulele.mp3',
   author: 'unknown',
-  duration: 'unknown'
+  duration: '146'
 };
 const songReducer = (state = INITIAL_SONG, action) => {
   switch (action.type) {
