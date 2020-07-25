@@ -40,8 +40,33 @@ const progressReducer = (state = 0, action) => {
   }
 };
 
+const songsReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'FETCH_SONGS':
+      return action.payload;
+
+    default:
+      return state;
+  }
+};
+
+const suggestBoxReducer = (state = null, action) => {
+  switch (action.type) {
+    case 'HIDE_SUGGEST_BOX':
+      return false;
+
+    case 'SHOW_SUGGEST_BOX':
+      return true;
+
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   isPlaying: playStatusReducer,
   currentSong: songReducer,
-  progressPercent: progressReducer
+  progressPercent: progressReducer,
+  fetchedSongs: songsReducer,
+  showSuggest: suggestBoxReducer
 });

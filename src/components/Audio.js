@@ -16,6 +16,8 @@ class MusicAudio extends React.Component {
   }
 
   render() {
+    this.audio.src = this.props.song.src;
+
     if (this.props.isPlaying) {
       this.audio.play();
     } else {

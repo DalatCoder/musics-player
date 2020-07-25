@@ -1,0 +1,89 @@
+.search-container .suggest {
+  background-color: rgb(253, 246, 246);
+  width: 60%; /* Equal search input form */
+  padding: 0 4px 10px 15px;
+
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+
+  border-radius: 0 0 30px 30px;
+
+  display: none;
+}
+
+.search-container .suggest .song:first-of-type {
+  padding-top: 30px;
+}
+
+.search-container.show-suggest .suggest {
+  display: block;
+}
+
+.song {
+  margin: 10px 0;
+  padding: 10px 0;
+  display: flex;
+  position: relative; /* For position delete button */
+}
+
+.song:not(:last-of-type) {
+  border-bottom: 1px solid #dfdbdf;
+}
+
+.song-order {
+  flex-basis: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.song-order span {
+  font-size: 20px;
+  color: #dfdbdf;
+}
+
+.song-photo {
+  width: 40px;
+  height: 40px;
+  margin-right: 15px;
+}
+
+.song-photo img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.song-info {
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.song-info .title {
+  margin-top: -5px;
+  margin-bottom: 5px;
+}
+
+.song-info .title p {
+  cursor: pointer;
+  color: #fe8daa;
+  font-size: 15px;
+}
+
+.song-info .artist {
+  font-size: 13px;
+  color: #dfdbdf;
+}
+
+.song-duration {
+  margin-right: 10px;
+  font-size: 15px;
+  color: #dfdbdf;
+}
