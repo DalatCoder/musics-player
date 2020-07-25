@@ -16,7 +16,4 @@ body {
     rgba(252, 221, 221, 1) 92%
   );
   font-family: 'Lato', sans-serif;
-  width: 1140px;
-  max-width: 100%;
-  min-height: 100vh;
 }
