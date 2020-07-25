@@ -40,3 +40,17 @@ export function normalizeVietnameseString(string) {
     .replace(/đ/g, 'd')
     .replace(/Đ/g, 'D');
 }
+
+export const debounce = (func, delay = 1000) => {
+  let timeoutId;
+
+  return (...args) => {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+
+    timeoutId = setTimeout(() => {
+      func.apply(null, args);
+    }, delay);
+  };
+};
