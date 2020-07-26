@@ -11,7 +11,6 @@ class SuggestBox extends React.Component {
   };
 
   renderErrorNotification = () => {
-    console.log('Error');
     return <div className="error-message">Không tìm thấy bài hát!</div>;
   };
 
@@ -56,7 +55,6 @@ class SuggestBox extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     songs: state.fetchedSongs,
     canFetchSong: state.canFetchSong
