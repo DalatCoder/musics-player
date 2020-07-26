@@ -1,7 +1,11 @@
 import './SearchBar.css';
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchSongs, showSuggestBox } from '../../actions';
+import {
+  fetchSongsAndStatus,
+  showSuggestBox,
+  hideSuggestBox
+} from '../../actions';
 import SuggestBox from './SuggestBox';
 import { normalizeVietnameseString } from '../../utils';
 
@@ -12,19 +16,19 @@ class SearchBar extends React.Component {
   onInputChange = event => {
     this.setState({ term: event.target.value });
 
-    const { fetchSongs } = this.props;
+    const { fetchSongsAndStatus } = this.props;
     if (this.timeoutId) {
       clearTimeout(this.timeoutId);
     }
 
     this.timeoutId = setTimeout(() => {
-      fetchSongs(normalizeVietnameseString(this.state.term));
+      fetchSongsAndStatus(normalizeVietnameseString(this.state.term));
     }, 1000);
   };
 
   onSearchSubmit = event => {
     event.preventDefault();
-    this.props.fetchSongs(normalizeVietnameseString(this.state.term));
+    this.props.fetchSongsAndStatus(normalizeVietnameseString(this.state.term));
     this.setState({ term: '' });
   };
 
@@ -44,6 +48,7 @@ class SearchBar extends React.Component {
             value={this.state.term}
             onChange={this.onInputChange}
             onFocus={() => this.props.showSuggestBox()}
+            onBlur={() => this.props.hideSuggestBox()}
           />
 
           <button type="submit" className="btn">
@@ -64,6 +69,7 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
-  fetchSongs,
-  showSuggestBox
+  fetchSongsAndStatus,
+  showSuggestBox,
+  hideSuggestBox
 })(SearchBar);

@@ -10,6 +10,11 @@ class SuggestBox extends React.Component {
     this.props.hideSuggestBox();
   };
 
+  renderErrorNotification = () => {
+    console.log('Error');
+    return <div className="error-message">Không tìm thấy bài hát!</div>;
+  };
+
   renderSuggestList = () => {
     return this.props.songs.map(song => {
       return (
@@ -33,13 +38,29 @@ class SuggestBox extends React.Component {
     });
   };
 
+  renderContent = () => {
+    if (this.props.canFetchSong === null) {
+      return null;
+    }
+
+    if (this.props.canFetchSong === true) {
+      return this.renderSuggestList();
+    }
+
+    return this.renderErrorNotification();
+  };
+
   render() {
-    return <div className="suggest">{this.renderSuggestList()}</div>;
+    return <div className="suggest">{this.renderContent()}</div>;
   }
 }
 
 const mapStateToProps = state => {
-  return { songs: state.fetchedSongs };
+  console.log(state);
+  return {
+    songs: state.fetchedSongs,
+    canFetchSong: state.canFetchSong
+  };
 };
 
 export default connect(mapStateToProps, {
