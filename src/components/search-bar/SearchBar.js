@@ -48,7 +48,6 @@ class SearchBar extends React.Component {
             value={this.state.term}
             onChange={this.onInputChange}
             onFocus={() => this.props.showSuggestBox()}
-            onBlur={() => this.props.hideSuggestBox()}
           />
 
           <button type="submit" className="btn">
