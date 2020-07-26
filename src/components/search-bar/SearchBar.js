@@ -1,8 +1,8 @@
-import './searchBar.css';
+import './SearchBar.css';
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchSongs, showSuggestBox } from '../../actions';
-import SuggestBox from './suggestBox';
+import SuggestBox from './SuggestBox';
 import { normalizeVietnameseString } from '../../utils';
 
 class SearchBar extends React.Component {
@@ -51,9 +51,7 @@ class SearchBar extends React.Component {
           </button>
         </form>
 
-        <div className="suggest">
-          <SuggestBox />
-        </div>
+        <SuggestBox />
       </div>
     );
   }

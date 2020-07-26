@@ -1,4 +1,4 @@
-import './suggestBox.css';
+import './SuggestBox.css';
 import React from 'react';
 import { connect } from 'react-redux';
 import { selectSong, playSong, hideSuggestBox } from '../../actions';
@@ -10,7 +10,7 @@ class SuggestBox extends React.Component {
     this.props.hideSuggestBox();
   };
 
-  render() {
+  renderSuggestList = () => {
     return this.props.songs.map(song => {
       return (
         <div className="song" key={song.id}>
@@ -31,6 +31,10 @@ class SuggestBox extends React.Component {
         </div>
       );
     });
+  };
+
+  render() {
+    return <div className="suggest">{this.renderSuggestList()}</div>;
   }
 }
 
