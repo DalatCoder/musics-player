@@ -53,7 +53,11 @@ export const fetchSongsAndStatus = title => async (dispatch, getState) => {
 };
 
 export const fetchSongs = title => async dispatch => {
-  const response = await zingmp3.get(`/${title}`);
+  const response = await zingmp3.get(`/`, {
+    params: {
+      query: title
+    }
+  });
 
   const songs = response.data.data || [];
 
