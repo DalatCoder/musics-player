@@ -40,7 +40,9 @@ export const showSuggestBox = () => {
 };
 
 export const fetchSongsAndStatus = title => async (dispatch, getState) => {
+  dispatch(showSpinLoader());
   await dispatch(fetchSongs(title));
+  dispatch(hideSpinLoader());
 
   const songs = getState().fetchedSongs;
   if (songs.length === 0) {
@@ -78,5 +80,17 @@ export const successFetchSongs = () => {
 export const failFetchSongs = () => {
   return {
     type: 'FETCH_FAIL'
+  };
+};
+
+export const hideSpinLoader = () => {
+  return {
+    type: 'HIDE_SPIN_LOADER'
+  };
+};
+
+export const showSpinLoader = () => {
+  return {
+    type: 'SHOW_SPIN_LOADER'
   };
 };
