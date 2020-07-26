@@ -39,6 +39,17 @@ export const showSuggestBox = () => {
   };
 };
 
+export const fetchSongsAndStatus = title => async (dispatch, getState) => {
+  await dispatch(fetchSongs(title));
+
+  const songs = getState().fetchedSongs;
+  if (songs.length === 0) {
+    dispatch(failFetchSongs());
+  } else {
+    dispatch(successFetchSongs());
+  }
+};
+
 export const fetchSongs = title => async dispatch => {
   const response = await zingmp3.get(`/${title}`);
 
@@ -56,4 +67,16 @@ export const fetchSongs = title => async dispatch => {
   });
 
   dispatch({ type: 'FETCH_SONGS', payload: formattedSongs });
+};
+
+export const successFetchSongs = () => {
+  return {
+    type: 'FETCH_SUCCESS'
+  };
+};
+
+export const failFetchSongs = () => {
+  return {
+    type: 'FETCH_FAIL'
+  };
 };
