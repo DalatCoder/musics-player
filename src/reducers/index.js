@@ -5,6 +5,7 @@ import songsReducer from './songsReducer';
 import fetchSongsStatusReducer from './fetchSongStatusReducer';
 import progressReducer from './progressReducer';
 import suggestBoxReducer from './suggestBoxReducer';
+import spinLoaderReducer from './spinLoaderReducer';
 
 export default combineReducers({
   isPlaying: playStatusReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   progressPercent: progressReducer,
   showSuggest: suggestBoxReducer,
   fetchedSongs: songsReducer,
-  canFetchSong: fetchSongsStatusReducer
+  canFetchSong: fetchSongsStatusReducer,
+  showSpinLoader: spinLoaderReducer
 });
