@@ -1,9 +1,6 @@
 import React from 'react';
 import './App.css';
-
-const SearchBar = () => {
-  return <div className="search-bar col-xl-10 col-lg-12">SearchBar</div>;
-};
+import SearchBar from './SearchBar';
 
 const MusicPlayer = () => {
   return (
