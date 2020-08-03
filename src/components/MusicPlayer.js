@@ -41,11 +41,25 @@ class MusicPlayer extends React.Component {
   }
 
   componentDidMount() {
+    this.audioRef.current.addEventListener('canplaythrough', e => {
+      this.setState({
+        duration: e.target.duration
+      });
+    });
+
+    this.audioRef.current.addEventListener('timeupdate', () => {
+      this.setState({
+        current: this.audioRef.current.currentTime
+      });
+    });
+
     this.audioRef.current.addEventListener('end', this.pauseAudio);
   }
 
   componentWillUnmount() {
     this.audioRef.current.removeEventListener('end');
+    this.audioRef.current.removeEventListener('canplaythrough');
+    this.audioRef.current.removeEventListener('timeupdate');
   }
 
   playAudio = () => {
@@ -54,6 +68,14 @@ class MusicPlayer extends React.Component {
 
   pauseAudio = () => {
     this.audioRef.current.pause();
+  };
+
+  toggleAudio = () => {
+    this.setState({
+      isPlaying: !this.state.isPlaying
+    });
+
+    return this.state.isPlaying ? this.pauseAudio() : this.playAudio();
   };
 
   render() {
@@ -82,7 +104,7 @@ class MusicPlayer extends React.Component {
               <i className="fas fa-backward" />
             </button>
             <button
-              onClick={this.playAudio}
+              onClick={this.toggleAudio}
               className="action-btn action-btn-big"
             >
               <i
