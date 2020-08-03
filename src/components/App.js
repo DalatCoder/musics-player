@@ -1,18 +1,11 @@
 import React from 'react';
 import './App.css';
 import SearchBar from './SearchBar';
-
-const MusicPlayer = () => {
-  return (
-    <div className="main-player col-xl-4 col-lg-5 col-md-5 col-sm-12">
-      MusicPlayer
-    </div>
-  );
-};
+import MusicPlayer from './MusicPlayer';
 
 const Aside = () => {
   return (
-    <div className="aside col-xl-6 col-lg-7 col-md-7 col-sm-12 ">Aside</div>
+    <div className="col-xl-5 col-lg-6 col-md-12">Aside</div>
   );
 };
 
