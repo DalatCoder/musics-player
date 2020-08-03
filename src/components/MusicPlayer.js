@@ -53,11 +53,16 @@ class MusicPlayer extends React.Component {
       });
     });
 
-    this.audioRef.current.addEventListener('end', this.pauseAudio);
+    this.audioRef.current.addEventListener('ended', () => {
+      this.setState({
+        isPlaying: false,
+        current: 0
+      });
+    });
   }
 
   componentWillUnmount() {
-    this.audioRef.current.removeEventListener('end');
+    this.audioRef.current.removeEventListener('ended');
     this.audioRef.current.removeEventListener('canplaythrough');
     this.audioRef.current.removeEventListener('timeupdate');
   }
@@ -78,6 +83,15 @@ class MusicPlayer extends React.Component {
     return this.state.isPlaying ? this.pauseAudio() : this.playAudio();
   };
 
+  onProgressBarClick = event => {
+    const progressWidth = event.target.clientWidth;
+    const currentWidth = event.nativeEvent.offsetX;
+    const duration = this.state.duration;
+
+    this.audioRef.current.currentTime =
+      (currentWidth / progressWidth) * duration;
+  };
+
   render() {
     const progressPercent = (this.state.current * 100) / this.state.duration;
 
@@ -88,7 +102,10 @@ class MusicPlayer extends React.Component {
         >
           <div className="music-info">
             <h4 id="title">{song.name}</h4>
-            <div className="progress-container">
+            <div
+              className="progress-container"
+              onClick={this.onProgressBarClick}
+            >
               <div
                 className="progress"
                 style={{ width: `${progressPercent}%` }}
