@@ -1,32 +1,6 @@
 import React from 'react';
 import './MusicPlayer.css';
-
-const song = {
-  hasVideo: 'false',
-  thumb: 'avatars/7/1/71e884a8168fa5a3a8c596dca8d30193_1473737667.jpg',
-  artist: 'Mr Siro',
-  streamingStatus: '1',
-  thumbVideo: '',
-  genreIds: '1,8,12109',
-  disable_platform_web: 'false',
-  artistIds: 'IWZ98609',
-  disSPlatform: '0',
-  duration: '299',
-  radioPid: 'ZEEZ8Z7D',
-  zing_choice: 'false',
-  name: 'Day Dứt Nỗi Đau',
-  block: 'false',
-  id: 'ZW6DF66B',
-  disDPlatform: '0'
-};
-
-const getImageURL = imageRelativeURL => {
-  return `https://photo-resize-zmp3.zadn.vn/w480_r1x1_jpeg/${imageRelativeURL}`;
-};
-
-const getSongURL = songId => {
-  return `http://api.mp3.zing.vn/api/streaming/audio/${songId}/320`;
-};
+import { getImageURL, getSongURL } from '../utils';
 
 class MusicPlayer extends React.Component {
   constructor(props) {
@@ -101,7 +75,7 @@ class MusicPlayer extends React.Component {
           className={`music-container ${this.state.isPlaying ? 'play' : ''}`}
         >
           <div className="music-info">
-            <h4 id="title">{song.name}</h4>
+            <h4 id="title">{this.props.song.name}</h4>
             <div
               className="progress-container"
               onClick={this.onProgressBarClick}
@@ -112,9 +86,9 @@ class MusicPlayer extends React.Component {
               />
             </div>
           </div>
-          <audio ref={this.audioRef} src={getSongURL(song.id)} />
+          <audio ref={this.audioRef} src={getSongURL(this.props.song.id)} />
           <div className="img-container">
-            <img src={getImageURL(song.thumb)} alt="Music cover" />
+            <img src={getImageURL(this.props.song.thumb)} alt="Music cover" />
           </div>
           <div className="navigation">
             <button className="action-btn">
