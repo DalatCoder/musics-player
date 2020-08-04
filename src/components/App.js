@@ -4,11 +4,8 @@ import './App.css';
 import SearchBar from './SearchBar';
 import MusicPlayer from './MusicPlayer';
 import Aside from './Aside';
+import Footer from './Footer';
 import { songs } from './testData';
-
-const Footer = () => {
-  return <div className="footer col-xl-10 col-lg-12">Footer</div>;
-};
 
 const App = () => {
   console.log(Object.values(songs));
