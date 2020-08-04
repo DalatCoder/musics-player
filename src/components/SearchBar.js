@@ -25,6 +25,21 @@ class SearchBar extends React.Component {
     this.setState({ songs, term: '' });
   };
 
+  onInputChange = async e => {
+    this.setState({ term: e.target.value });
+
+    let timeoutId;
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+    setTimeout(async () => {
+      const songs = await fetchSongs(
+        normalizeVietnameseString(this.state.term)
+      );
+      this.setState({ songs });
+    }, 700);
+  };
+
   render() {
     const searchContainerClassName = `search-container ${
       this.props.showSuggest ? 'show-suggest' : ''
@@ -47,7 +62,7 @@ class SearchBar extends React.Component {
               spellCheck="false"
               onFocus={this.props.onFocus}
               value={this.state.term}
-              onChange={e => this.setState({ term: e.target.value })}
+              onChange={this.onInputChange}
             />
             <button type="submit" className="btn">
               <i className="fas fa-search" />
