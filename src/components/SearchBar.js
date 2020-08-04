@@ -17,6 +17,7 @@ class SearchBar extends React.Component {
     songs: null,
     term: ''
   };
+  timeoutId = null;
 
   onFormSubmit = async e => {
     e.preventDefault();
@@ -27,17 +28,22 @@ class SearchBar extends React.Component {
 
   onInputChange = async e => {
     this.setState({ term: e.target.value });
-
-    let timeoutId;
-    if (timeoutId) {
-      clearTimeout(timeoutId);
+    if (
+      e.target.value.trim().length === 0 ||
+      e.target.value.trim() === this.state.term.trim()
+    ) {
+      return;
     }
-    setTimeout(async () => {
+
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+    }
+    this.timeoutId = setTimeout(async () => {
       const songs = await fetchSongs(
         normalizeVietnameseString(this.state.term)
       );
       this.setState({ songs });
-    }, 700);
+    }, 500);
   };
 
   render() {
