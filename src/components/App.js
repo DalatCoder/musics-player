@@ -17,7 +17,10 @@ const App = () => {
 
   useEffect(() => {
     const raw = window.localStorage.getItem('songs') || [];
-    setSongs(JSON.parse(raw));
+
+    if (raw.length > 0) {
+      setSongs(JSON.parse(raw));
+    }
   }, []);
 
   const onSearchFocus = () => {
