@@ -1,12 +1,12 @@
 import React from 'react';
+import _ from 'lodash';
 import './App.css';
 import SearchBar from './SearchBar';
 import MusicPlayer from './MusicPlayer';
+import { songs } from './testData';
 
 const Aside = () => {
-  return (
-    <div className="col-xl-5 col-lg-6 col-md-12">Aside</div>
-  );
+  return <div className="col-xl-5 col-lg-6 col-md-12">Aside</div>;
 };
 
 const Footer = () => {
