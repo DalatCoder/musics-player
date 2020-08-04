@@ -7,38 +7,51 @@ class MusicPlayer extends React.Component {
     super(props);
 
     this.state = {
-      isPlaying: false,
+      isPlaying: this.props.isPlaying,
       duration: 0,
       current: 0
     };
     this.audioRef = React.createRef();
   }
 
+  onAudioLoad = e => {
+    this.setState({
+      duration: e.target.duration
+    });
+
+    if (this.state.isPlaying) {
+      this.audioRef.current.play();
+    }
+  };
+
+  onTimeUpdate = () => {
+    this.setState({
+      current: this.audioRef.current.currentTime
+    });
+  };
+
+  onAudioEnded = () => {
+    this.setState({
+      isPlaying: false,
+      current: 0
+    });
+  };
+
   componentDidMount() {
-    this.audioRef.current.addEventListener('canplaythrough', e => {
-      this.setState({
-        duration: e.target.duration
-      });
-    });
+    this.audioRef.current.addEventListener('canplaythrough', this.onAudioLoad);
 
-    this.audioRef.current.addEventListener('timeupdate', () => {
-      this.setState({
-        current: this.audioRef.current.currentTime
-      });
-    });
+    this.audioRef.current.addEventListener('timeupdate', this.onTimeUpdate);
 
-    this.audioRef.current.addEventListener('ended', () => {
-      this.setState({
-        isPlaying: false,
-        current: 0
-      });
-    });
+    this.audioRef.current.addEventListener('ended', this.onAudioEnded);
   }
 
   componentWillUnmount() {
-    this.audioRef.current.removeEventListener('ended');
-    this.audioRef.current.removeEventListener('canplaythrough');
-    this.audioRef.current.removeEventListener('timeupdate');
+    this.audioRef.current.removeEventListener('timeupdate', this.onTimeUpdate);
+    this.audioRef.current.removeEventListener('ended', this.onAudioEnded);
+    this.audioRef.current.removeEventListener(
+      'canplaythrough',
+      this.onAudioLoad
+    );
   }
 
   playAudio = () => {

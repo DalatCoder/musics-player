@@ -1,7 +1,7 @@
-import React from 'react'
-import { getImageURL, formatDuration } from '../utils'
+import React from 'react';
+import { getImageURL, formatDuration } from '../utils';
 
-const Song = ({ song, order }) => {
+const Song = ({ song, order, onClick }) => {
   const songOrder = order ? <div className="song-order">{order}</div> : null;
 
   return (
@@ -11,7 +11,9 @@ const Song = ({ song, order }) => {
         <img src={getImageURL(song.thumb)} alt={`Thumbnail of ${song.name}`} />
       </div>
       <div className="song-info">
-        <div className="title">{song.name}</div>
+        <div className="title" onClick={() => onClick(song)}>
+          {song.name}
+        </div>
         <div className="artist">{song.artist}</div>
       </div>
       <div className="song-duration">{formatDuration(song.duration)}</div>
