@@ -1,0 +1,27 @@
+.suggest {
+  background-color: rgb(253, 246, 246);
+  width: 100%;
+  padding: 0 4px 10px 15px;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  display: none;
+
+  border-radius: 30px;
+}
+
+.search-container .suggest .song:first-of-type {
+  padding-top: 60px;
+}
+
+.search-container.show-suggest .suggest {
+  display: block;
+}
+
+.suggest-error {
+  padding: 60px 0 5px;
+  text-align: center;
+  color: #aaa;
+}
