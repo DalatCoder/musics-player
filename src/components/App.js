@@ -19,7 +19,9 @@ const App = () => {
     const raw = window.localStorage.getItem('songs') || [];
 
     if (raw.length > 0) {
-      setSongs(JSON.parse(raw));
+      const songs = JSON.parse(raw);
+      setSongs(songs);
+      setCurrentSong(Object.values(songs)[0]);
     }
   }, []);
 
