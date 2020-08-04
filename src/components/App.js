@@ -16,7 +16,7 @@ const App = () => {
   const [playerSession, setPlayerSession] = useState(1);
 
   useEffect(() => {
-    const raw = window.localStorage.getItem('songs');
+    const raw = window.localStorage.getItem('songs') || [];
     setSongs(JSON.parse(raw));
   }, []);
 
