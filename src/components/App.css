@@ -4,6 +4,9 @@ body {
     rgba(247, 247, 247, 1) 23.8%,
     rgba(252, 221, 221, 1) 92%
   );
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
   box-sizing: border-box;
 }
 
@@ -15,11 +18,17 @@ body {
   .music-container {
     width: 450px;
   }
+  .music-info #title {
+    font-size: 15px !important;
+  }
 }
 
 @media only screen and (min-width: 992px) {
   .search-container {
     width: 700px;
+  }
+  .music-info #title {
+    font-size: 16px !important;
   }
 }
 

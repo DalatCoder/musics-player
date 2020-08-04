@@ -93,6 +93,8 @@ const App = () => {
     onSongSelected
   };
 
+  console.log(songs);
+
   return (
     <div className="container-fluid" onClick={() => setShowSuggest(false)}>
       <div className="row justify-content-lg-center">
@@ -100,7 +102,7 @@ const App = () => {
       </div>
       <div className="row justify-content-lg-center">
         <MusicPlayer {...musicPlayerProps} />
-        <Aside {...asideProps} />
+        {Object.keys(songs).length > 0 ? <Aside {...asideProps} /> : null}
       </div>
       <div className="row justify-content-lg-center">
         <Footer />
