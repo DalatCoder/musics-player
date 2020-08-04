@@ -21,11 +21,11 @@ const App = () => {
 
   const onSongSelected = song => {
     setShowSuggest(false);
-    setCurrentSong(songs[song.id]);
     setSongs({
       ...songs,
       [song.id]: song
     });
+    setCurrentSong(song);
     setPlayingStatus(true);
     setPlayerSession(playerSession + 1);
   };
