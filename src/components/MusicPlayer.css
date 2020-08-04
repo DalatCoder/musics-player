@@ -125,6 +125,14 @@
   transition: width 0.1 linear;
 }
 
+.btn-loop {
+  transition: all 0.3s;
+}
+
+.btn-loop.active {
+  color: #7f7e7e;
+}
+
 @keyframes rotate {
   0% {
     transform: rotate(0deg);

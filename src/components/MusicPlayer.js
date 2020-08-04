@@ -8,6 +8,7 @@ class MusicPlayer extends React.Component {
 
     this.state = {
       isPlaying: this.props.isPlaying,
+      isLoop: false,
       duration: 0,
       current: 0
     };
@@ -35,6 +36,14 @@ class MusicPlayer extends React.Component {
       isPlaying: false,
       current: 0
     });
+
+    if (this.state.isLoop) {
+      this.setState({
+        isPlaying: true
+      });
+
+      this.playAudio();
+    }
   };
 
   componentDidMount() {
@@ -68,6 +77,12 @@ class MusicPlayer extends React.Component {
     });
 
     return this.state.isPlaying ? this.pauseAudio() : this.playAudio();
+  };
+
+  toggleAudioLoop = () => {
+    this.setState({
+      isLoop: !this.state.isLoop
+    });
   };
 
   onProgressBarClick = event => {
@@ -118,7 +133,12 @@ class MusicPlayer extends React.Component {
             <button className="action-btn">
               <i className="fas fa-forward" />
             </button>
-            <button className="action-btn">
+            <button
+              className={`action-btn btn-loop ${
+                this.state.isLoop ? 'active' : ''
+              }`}
+              onClick={this.toggleAudioLoop}
+            >
               <i className="fas fa-undo" />
             </button>
           </div>
