@@ -4,10 +4,6 @@ import Song from './Song';
 
 class Suggest extends React.Component {
   renderSongs(songs, onSongClick) {
-    if (!songs) {
-      return null;
-    }
-
     if (songs.length === 0) {
       return <div className="suggest-error">Không tìm thấy kết quả</div>;
     }
@@ -18,6 +14,10 @@ class Suggest extends React.Component {
   }
 
   render() {
+    if (!this.props.songs) {
+      return null;
+    }
+
     return (
       <div className="suggest">
         {this.renderSongs(this.props.songs, this.props.onSongSelected)}

@@ -1,11 +1,28 @@
 import React from 'react';
 import './SearchBar.css';
 import Suggest from './Suggest';
-import { songs } from './testData';
+import axios from 'axios';
+import { normalizeVietnameseString } from '../utils';
+
+const fetchSongs = async term => {
+  const response = await axios.get(
+    `https://dalatcoder-mp3-app.herokuapp.com/${term}`
+  );
+
+  return response.data.data;
+};
 
 class SearchBar extends React.Component {
   state = {
-    songs: Object.values(songs)
+    songs: null,
+    term: ''
+  };
+
+  onFormSubmit = async e => {
+    e.preventDefault();
+
+    const songs = await fetchSongs(normalizeVietnameseString(this.state.term));
+    this.setState({ songs, term: '' });
   };
 
   render() {
@@ -19,7 +36,7 @@ class SearchBar extends React.Component {
           className={searchContainerClassName}
           onClick={e => e.stopPropagation()}
         >
-          <form className="form">
+          <form className="form" onSubmit={this.onFormSubmit}>
             <input
               type="text"
               id="search"
@@ -29,6 +46,8 @@ class SearchBar extends React.Component {
               autoCapitalize="off"
               spellCheck="false"
               onFocus={this.props.onFocus}
+              value={this.state.term}
+              onChange={e => this.setState({ term: e.target.value })}
             />
             <button type="submit" className="btn">
               <i className="fas fa-search" />
@@ -36,7 +55,7 @@ class SearchBar extends React.Component {
           </form>
           {this.props.showSuggest ? (
             <Suggest
-              songs={this.state.songs.slice(0, 5)}
+              songs={this.state.songs}
               onSongSelected={this.props.onSongSelected}
             />
           ) : null}
