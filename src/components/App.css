@@ -9,15 +9,15 @@ body {
 }
 
 .search-bar {
-  background-color: tan;
 }
 
 .main-player {
-  background-color: gold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .aside {
-  background-color: teal;
 }
 
 .footer {
