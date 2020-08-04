@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import SearchBar from './SearchBar';
 import MusicPlayer from './MusicPlayer';
@@ -7,13 +7,18 @@ import Footer from './Footer';
 import { songs as data } from './testData';
 
 const App = () => {
-  const [songs, setSongs] = useState(data);
+  const [songs, setSongs] = useState([]);
   const [currentSong, setCurrentSong] = useState(Object.values(data)[1]);
   const [showSuggest, setShowSuggest] = useState(false);
   const [playingStatus, setPlayingStatus] = useState(false);
 
   // For rerender brand-new Player component
   const [playerSession, setPlayerSession] = useState(1);
+
+  useEffect(() => {
+    const raw = window.localStorage.getItem('songs');
+    setSongs(JSON.parse(raw));
+  }, []);
 
   const onSearchFocus = () => {
     setShowSuggest(true);
@@ -28,6 +33,14 @@ const App = () => {
     setCurrentSong(song);
     setPlayingStatus(true);
     setPlayerSession(playerSession + 1);
+
+    window.localStorage.setItem(
+      'songs',
+      JSON.stringify({
+        ...songs,
+        [song.id]: song
+      })
+    );
   };
 
   const onNextSongClick = currentSong => {
