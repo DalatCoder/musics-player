@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import SearchBar from './SearchBar';
-import MusicPlayer from './MusicPlayer';
-import Aside from './Aside';
-import Footer from './Footer';
+import SearchBar from './SearchBar/SearchBar';
+import MusicPlayer from './MusicPlayer/MusicPlayer';
+import Aside from './Aside/Aside';
+import Footer from './Footer/Footer';
 import { songs as data } from './testData';
 
 const App = () => {
@@ -25,15 +25,17 @@ const App = () => {
     }
   }, []);
 
+  const showAside = Object.keys(songs).length > 0 ? true : false;
+
   const onSearchFocus = () => {
     setShowSuggest(true);
   };
 
-  const onSongSelected = song => {
+  const onSongSelected = (song) => {
     setShowSuggest(false);
     setSongs({
       ...songs,
-      [song.id]: song
+      [song.id]: song,
     });
     setCurrentSong(song);
     setPlayingStatus(true);
@@ -43,14 +45,14 @@ const App = () => {
       'songs',
       JSON.stringify({
         ...songs,
-        [song.id]: song
+        [song.id]: song,
       })
     );
   };
 
-  const onNextSongClick = currentSong => {
+  const onNextSongClick = (currentSong) => {
     const songIds = Object.keys(songs);
-    const currentSongId = songIds.findIndex(id => id === currentSong.id);
+    const currentSongId = songIds.findIndex((id) => id === currentSong.id);
     let nextSongId = currentSongId + 1;
 
     if (nextSongId === songIds.length) {
@@ -62,9 +64,9 @@ const App = () => {
     setPlayerSession(playerSession + 1);
   };
 
-  const onPrevSongClick = currentSong => {
+  const onPrevSongClick = (currentSong) => {
     const songIds = Object.keys(songs);
-    const currentSongId = songIds.findIndex(id => id === currentSong.id);
+    const currentSongId = songIds.findIndex((id) => id === currentSong.id);
     let prevSongId = currentSongId - 1;
 
     if (prevSongId < 0) {
@@ -79,7 +81,7 @@ const App = () => {
   const searchBarProps = {
     showSuggest,
     onFocus: onSearchFocus,
-    onSongSelected
+    onSongSelected,
   };
 
   const musicPlayerProps = {
@@ -87,26 +89,24 @@ const App = () => {
     song: currentSong,
     isPlaying: playingStatus,
     onNextBtnClick: onNextSongClick,
-    onPrevBtnClick: onPrevSongClick
+    onPrevBtnClick: onPrevSongClick,
   };
 
   const asideProps = {
     songs: Object.values(songs),
-    onSongSelected
+    onSongSelected,
   };
 
-  console.log(songs);
-
   return (
-    <div className="container-fluid" onClick={() => setShowSuggest(false)}>
-      <div className="row justify-content-lg-center">
+    <div className='container-fluid' onClick={() => setShowSuggest(false)}>
+      <div className='row justify-content-lg-center'>
         <SearchBar {...searchBarProps} />
       </div>
-      <div className="row justify-content-lg-center">
+      <div className='row justify-content-lg-center'>
         <MusicPlayer {...musicPlayerProps} />
-        {Object.keys(songs).length > 0 ? <Aside {...asideProps} /> : null}
+        {showAside ? <Aside {...asideProps} /> : null}
       </div>
-      <div className="row justify-content-lg-center">
+      <div className='row justify-content-lg-center'>
         <Footer />
       </div>
     </div>
