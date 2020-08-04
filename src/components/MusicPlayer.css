@@ -1,3 +1,9 @@
+.main-player {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .music-container {
   width: 450px;
   height: 100px;
