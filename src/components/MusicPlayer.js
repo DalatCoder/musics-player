@@ -120,7 +120,10 @@ class MusicPlayer extends React.Component {
           </div>
           <div className="navigation">
             <button className="action-btn">
-              <i className="fas fa-backward" />
+              <i
+                className="fas fa-backward"
+                onClick={() => this.props.onPrevBtnClick(this.props.song)}
+              />
             </button>
             <button
               onClick={this.toggleAudio}
@@ -130,7 +133,10 @@ class MusicPlayer extends React.Component {
                 className={`fas fa-${this.state.isPlaying ? 'pause' : 'play'}`}
               />
             </button>
-            <button className="action-btn">
+            <button
+              className="action-btn"
+              onClick={() => this.props.onNextBtnClick(this.props.song)}
+            >
               <i className="fas fa-forward" />
             </button>
             <button

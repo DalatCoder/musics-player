@@ -30,22 +30,61 @@ const App = () => {
     setPlayerSession(playerSession + 1);
   };
 
+  const onNextSongClick = currentSong => {
+    const songIds = Object.keys(songs);
+    const currentSongId = songIds.findIndex(id => id === currentSong.id);
+    let nextSongId = currentSongId + 1;
+
+    if (nextSongId === songIds.length) {
+      nextSongId = 0;
+    }
+
+    setCurrentSong(songs[songIds[nextSongId]]);
+    setPlayingStatus(true);
+    setPlayerSession(playerSession + 1);
+  };
+
+  const onPrevSongClick = currentSong => {
+    const songIds = Object.keys(songs);
+    const currentSongId = songIds.findIndex(id => id === currentSong.id);
+    let prevSongId = currentSongId - 1;
+
+    if (prevSongId < 0) {
+      prevSongId = songIds.length - 1;
+    }
+
+    setCurrentSong(songs[songIds[prevSongId]]);
+    setPlayingStatus(true);
+    setPlayerSession(playerSession + 1);
+  };
+
+  const searchBarProps = {
+    showSuggest,
+    onFocus: onSearchFocus,
+    onSongSelected
+  };
+
+  const musicPlayerProps = {
+    key: playerSession,
+    song: currentSong,
+    isPlaying: playingStatus,
+    onNextBtnClick: onNextSongClick,
+    onPrevBtnClick: onPrevSongClick
+  };
+
+  const asideProps = {
+    songs: Object.values(songs),
+    onSongSelected
+  };
+
   return (
     <div className="container-fluid" onClick={() => setShowSuggest(false)}>
       <div className="row justify-content-lg-center">
-        <SearchBar
-          showSuggest={showSuggest}
-          onFocus={onSearchFocus}
-          onSongSelected={onSongSelected}
-        />
+        <SearchBar {...searchBarProps} />
       </div>
       <div className="row justify-content-lg-center">
-        <MusicPlayer
-          key={playerSession}
-          song={currentSong}
-          isPlaying={playingStatus}
-        />
-        <Aside songs={Object.values(songs)} onSongSelected={onSongSelected} />
+        <MusicPlayer {...musicPlayerProps} />
+        <Aside {...asideProps} />
       </div>
       <div className="row justify-content-lg-center">
         <Footer />
