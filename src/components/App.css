@@ -6,3 +6,60 @@ body {
   );
   box-sizing: border-box;
 }
+
+@media only screen and (min-width: 576px) {
+  .search-container {
+    width: 500px;
+  }
+
+  .music-container {
+    width: 450px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .search-container {
+    width: 700px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .music-container {
+    width: 400px;
+  }
+
+  .action-btn {
+    font-size: 15px !important;
+    margin-right: 10px !important;
+  }
+
+  .music-info #title {
+    font-size: 15px !important;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .search-container {
+    width: 300px;
+  }
+  .music-container {
+    width: 300px;
+    padding: 20px 0 20px 30px !important;
+  }
+  .action-btn {
+    font-size: 15px !important;
+    margin: 0 !important;
+  }
+
+  .music-info {
+    padding-left: 100px !important;
+  }
+
+  .music-info #title {
+    font-size: 11px !important;
+  }
+
+  .navigation {
+    margin-left: 20px !important;
+  }
+}

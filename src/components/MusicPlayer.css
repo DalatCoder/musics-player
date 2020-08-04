@@ -2,11 +2,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: tan;
+  /*background-color: tan;*/
 }
 
 .music-container {
-  width: 450px;
   height: 100px;
   background-color: #fff;
   border: none;
